@@ -12,6 +12,74 @@ alias cdmac='cd ~/macsetup'
 alias brewup='brew update && brew upgrade && brew cleanup'
 alias brewupcask='brew update && brew upgrade --cask && brew cleanup'
 
-# Git  aliases
+# Git aliases
 
 alias gta='git add .'
+
+# Git pull function
+# Git pull function
+gpull() {
+  if [[ -z "$1" ]]; then
+    echo "❌ Error: No branch specified."
+    echo "Usage: gpull <branch-name>"
+    return 1
+  fi
+
+  local branch="$1"
+
+  echo "🔄 Switching to branch '$branch'..."
+  git checkout "$branch"
+
+  if [[ $? -ne 0 ]]; then
+    echo "❌ Failed to switch to branch '$branch'."
+    return 1
+  fi
+
+  echo "⬇️ Pulling latest changes from origin/$branch..."
+  git pull origin "$branch"
+
+  if [[ $? -ne 0 ]]; then
+    echo "❌ Failed to pull changes from origin/$branch. Please check for errors."
+    return 1
+  fi
+
+  echo "✅ Successfully pulled latest changes for branch '$branch'."
+}
+
+# Git push function
+gpush() {
+  if [[ -z "$1" ]]; then
+    echo "❌ Error: No commit message specified."
+    echo "Usage: gpush <commit-message>"
+    return 1
+  fi
+
+  local commit_message="$1"
+  local branch=$(git rev-parse --abbrev-ref HEAD)
+
+  echo "📂 Staging all changes..."
+  git add .
+
+  if [[ $? -ne 0 ]]; then
+    echo "❌ Failed to stage changes. Please check for errors."
+    return 1
+  fi
+
+  echo "📝 Committing changes with message: '$commit_message'..."
+  git commit -m "$commit_message"
+
+  if [[ $? -ne 0 ]]; then
+    echo "❌ Failed to commit changes. Please check for errors."
+    return 1
+  fi
+
+  echo "⬆️ Pushing changes to origin/$branch..."
+  git push origin "$branch"
+
+  if [[ $? -ne 0 ]]; then
+    echo "❌ Failed to push changes to origin/$branch. Please check for errors."
+    return 1
+  fi
+
+  echo "✅ Successfully pushed changes to origin/$branch."
+}

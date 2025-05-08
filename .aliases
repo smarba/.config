@@ -9,8 +9,51 @@ alias cdans='cd ~/ansible'
 alias cdmac='cd ~/macsetup'
 
 # Package management
-alias brewup='brew update && brew upgrade && brew cleanup'
-alias brewupcask='brew update && brew upgrade --cask && brew cleanup'
+# Function to update and upgrade Homebrew packages
+brewup() {
+  echo "🔄 Updating Homebrew..."
+  if ! brew update; then
+    echo "❌ Failed to update Homebrew. Please check for errors."
+    return 1
+  fi
+
+  echo "⬆️ Upgrading Homebrew packages..."
+  if ! brew upgrade; then
+    echo "❌ Failed to upgrade Homebrew packages. Please check for errors."
+    return 1
+  fi
+
+  echo "🧹 Cleaning up Homebrew..."
+  if ! brew cleanup; then
+    echo "❌ Failed to clean up Homebrew. Please check for errors."
+    return 1
+  fi
+
+  echo "✅ Homebrew update, upgrade, and cleanup completed successfully."
+}
+
+# Function to update and upgrade Homebrew cask packages
+brewupcask() {
+  echo "🔄 Updating Homebrew..."
+  if ! brew update; then
+    echo "❌ Failed to update Homebrew. Please check for errors."
+    return 1
+  fi
+
+  echo "⬆️ Upgrading Homebrew cask packages..."
+  if ! brew upgrade --cask; then
+    echo "❌ Failed to upgrade Homebrew cask packages. Please check for errors."
+    return 1
+  fi
+
+  echo "🧹 Cleaning up Homebrew..."
+  if ! brew cleanup; then
+    echo "❌ Failed to clean up Homebrew. Please check for errors."
+    return 1
+  fi
+
+  echo "✅ Homebrew cask update, upgrade, and cleanup completed successfully."
+}
 
 # Git aliases
 

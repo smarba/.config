@@ -1,0 +1,17 @@
+# vim: filetype=zsh
+# shellcheck shell=zsh
+
+# Contains aliases and functions to use from the CLI
+
+# Navigation
+alias ..='cd ..'
+alias cdans='cd ~/ansible'
+alias cdmac='cd ~/macsetup'
+
+# Package management
+alias brewup='brew update && brew upgrade && brew cleanup'
+alias brewupcask='brew update && brew upgrade --cask && brew cleanup'
+
+# Git  aliases
+
+alias gta='git add .'

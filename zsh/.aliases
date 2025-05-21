@@ -3,6 +3,8 @@
 
 # Contains aliases and functions to use from the CLI
 
+alias ls='ls --color=auto'
+
 # Navigation
 alias ..='cd ..'
 alias cdans='cd ~/ansible'

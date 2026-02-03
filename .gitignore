@@ -4,3 +4,4 @@
 .vscode/
 .cache/
 *.sock
+*.DS_Store
